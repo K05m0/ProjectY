@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class PlayerControllHolder : MonoBehaviour
 {
-    [HideInInspector] public float horizontal;
-    [HideInInspector] public float vertical;
+    public float vertical;
+    public float horizontal;
+    public KeyCode runKeyCode;
+    public KeyCode freeAimKeyCode;
     [SerializeField] private LayerMask groundCollideWithRay;
-    public KeyCode sprintKeyCode;
-    public KeyCode crouchKeyCode;
-    public KeyCode aimKeyCode;
 
     private void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
+        horizontal = Input.GetAxis("Horizontal");
     }
-
     public (bool succes, Vector3 position) GetMousePosition()
     {
         //ray from camera to mouse pointer;
@@ -28,5 +26,6 @@ public class PlayerControllHolder : MonoBehaviour
         else
             //else send vector3(0,0,0)
             return (succes: false, Position: Vector3.zero);
+
     }
 }

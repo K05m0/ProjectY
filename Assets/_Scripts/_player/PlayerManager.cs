@@ -4,49 +4,72 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    PlayerControllHolder controllHolder;
-    PlayerRotation rotation;
-    CharacterController controller;
-    PlayerMovement movement;
+    private PlayerMovement movement;
+    private PlayerControllHolder controllHolder;
+    private CharacterController controller;
+    private PlayerRotation rotation;
 
     [SerializeField] private float walkSpeed;
-    [SerializeField] private float sprintSpeed;
-    [SerializeField] private float crouchSpeed;
+    [SerializeField] private float runSpeed;
 
+    [SerializeField] private float freeRotationSpeed;
     [SerializeField] private float normalRotationSpeed;
-    [SerializeField] private float aimRotationSpeed;
+
+    private float movementSpeed;
+    [SerializeField] private MoveState playerMoveState;
+    [SerializeField] private AimState playerAimState;
+
 
     private void Awake()
     {
-        controllHolder = GetComponent<PlayerControllHolder>();
-        movement = GetComponent<PlayerMovement>();
-        controller = GetComponent<CharacterController>();
         rotation = GetComponent<PlayerRotation>();
+        movement = GetComponent<PlayerMovement>();
+        controllHolder = GetComponent<PlayerControllHolder>();
+        controller = GetComponent<CharacterController>();
     }
-
     private void Update()
     {
-        movement.Gravity();
+        AimStateController();
+        MoveStateController();
 
-        if (Input.GetKey(controllHolder.sprintKeyCode))
+        if (playerAimState == AimState.aim)
         {
-            movement.Movement(controllHolder.horizontal, controllHolder.vertical, sprintSpeed, controller);
+            rotation.PlayerFreeRotation(freeRotationSpeed, controllHolder.GetMousePosition().position);
         }
-        else
+        else if(playerAimState == AimState.notAim)
         {
-            movement.Movement(controllHolder.horizontal, controllHolder.vertical, walkSpeed, controller);
-        }
-
-        if (Input.GetKey(controllHolder.aimKeyCode))
-        {
-            if (controllHolder.GetMousePosition().succes)
-                rotation.PlayerAimRotation(aimRotationSpeed, controllHolder.GetMousePosition().position);
-            else
-                rotation.PlayerNormalRotation(controllHolder.horizontal, controllHolder.vertical, normalRotationSpeed);
-        }
-        else
-        {
-            rotation.PlayerNormalRotation(controllHolder.horizontal, controllHolder.vertical, normalRotationSpeed);
+            rotation.PlayerNormalRotation(controllHolder.vertical, controllHolder.horizontal, normalRotationSpeed);
         }
     }
+    private void FixedUpdate()
+    {
+        movement.Movement(controllHolder.vertical, controllHolder.horizontal, movementSpeed, controller);
+    }
+
+    private void MoveStateController()
+    {
+        if (Input.GetKey(controllHolder.runKeyCode))
+        {
+            playerMoveState = MoveState.Run;
+            movementSpeed = runSpeed;
+        }
+        else
+        {
+            playerMoveState = MoveState.Walk;
+            movementSpeed = walkSpeed;
+        }
+    }
+    private void AimStateController()
+    {
+        if (Input.GetKey(controllHolder.freeAimKeyCode))
+        {
+            playerAimState = AimState.aim;
+        }
+        else
+        {
+            playerAimState = AimState.notAim;
+        }
+    }
+    private enum AimState { aim, notAim }
+    private enum MoveState { Run, Walk }
 }
