@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +7,21 @@ public class PlayerControllHolder : MonoBehaviour
     public float vertical;
     public float horizontal;
     public KeyCode runKeyCode;
-    public KeyCode freeAimKeyCode;
     [SerializeField] private LayerMask groundCollideWithRay;
+
+    public KeyCode freeAimKeyCode;
+
+    public List<KeyCode> gunSlots;
+    public KeyCode shoot;
+    private bool[] isSlotPressed;
+
+    private void Awake()
+    {
+        for (int i = 0; i < gunSlots.Count; i++)
+            gunSlots[i] = (KeyCode)49 + i;
+
+        isSlotPressed = new bool[gunSlots.Count];
+    }
 
     private void Update()
     {
@@ -26,6 +39,5 @@ public class PlayerControllHolder : MonoBehaviour
         else
             //else send vector3(0,0,0)
             return (succes: false, Position: Vector3.zero);
-
     }
 }

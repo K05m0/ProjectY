@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     private PlayerControllHolder controllHolder;
     private CharacterController controller;
     private PlayerRotation rotation;
+    private PlayerShoot shoot;
 
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
@@ -19,11 +20,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private MoveState playerMoveState;
     [SerializeField] private AimState playerAimState;
 
-
     private void Awake()
     {
         rotation = GetComponent<PlayerRotation>();
         movement = GetComponent<PlayerMovement>();
+        shoot = GetComponent<PlayerShoot>();
         controllHolder = GetComponent<PlayerControllHolder>();
         controller = GetComponent<CharacterController>();
     }
@@ -36,9 +37,21 @@ public class PlayerManager : MonoBehaviour
         {
             rotation.PlayerFreeRotation(freeRotationSpeed, controllHolder.GetMousePosition().position);
         }
-        else if(playerAimState == AimState.notAim)
+        else if (playerAimState == AimState.notAim)
         {
             rotation.PlayerNormalRotation(controllHolder.vertical, controllHolder.horizontal, normalRotationSpeed);
+        }
+
+        shoot.Shoot(controllHolder.shoot);
+
+
+        for (int i = 0; i < controllHolder.gunSlots.Count; i++)
+        {
+            if (Input.GetKeyDown(controllHolder.gunSlots[i]))
+            {
+                shoot.CheckGunType(i);
+                shoot.ChangeGun();
+            }
         }
     }
     private void FixedUpdate()

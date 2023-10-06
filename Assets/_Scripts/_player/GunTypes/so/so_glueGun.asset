@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3150119bfb5f8f43a000de5247d1c56, type: 3}
+  m_Name: so_glueGun
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8441206291242380844, guid: 2476f0c133fcf204180c240b4a68c0d2, type: 3}
+  gunPrefab: {fileID: 1834318258709140881, guid: ca5942a3d6d5c694684a6b67adb9811d,
+    type: 3}
+  shootPower: 3
+  maxAmmo: 0
+  currAmmo: 0
