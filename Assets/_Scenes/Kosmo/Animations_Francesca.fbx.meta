@@ -5,7 +5,54 @@ labels:
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BOOT_L
+    second: {fileID: 2296067981202144458, guid: 97341d02651f7ce4aaca1be37ff2e510,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BOOT_L.001
+    second: {fileID: -5551059620935493958, guid: 97341d02651f7ce4aaca1be37ff2e510,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: -9103484930961366303, guid: 97341d02651f7ce4aaca1be37ff2e510,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EYES
+    second: {fileID: 2976375086172351072, guid: 97341d02651f7ce4aaca1be37ff2e510,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HAND_L
+    second: {fileID: 1181902533245468758, guid: 97341d02651f7ce4aaca1be37ff2e510,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HAND_R
+    second: {fileID: 558542565985761242, guid: 97341d02651f7ce4aaca1be37ff2e510, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TEETH
+    second: {fileID: 4853146816161605969, guid: 97341d02651f7ce4aaca1be37ff2e510,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Trousers
+    second: {fileID: 4372440248028022621, guid: 97341d02651f7ce4aaca1be37ff2e510,
+      type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
