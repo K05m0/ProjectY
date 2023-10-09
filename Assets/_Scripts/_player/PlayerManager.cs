@@ -19,7 +19,7 @@ public class PlayerManager : MonoBehaviour
 
     private float move;
     private float movementSpeed;
-    private Vector3 lastPosition;
+    
     [SerializeField] private MoveState playerMoveState;
     [SerializeField] private AimState playerAimState;
 
@@ -39,10 +39,7 @@ public class PlayerManager : MonoBehaviour
    
     private void Update()
     {
-        move = Vector3.Distance(transform.position, lastPosition) / Time.deltaTime;
-        Debug.Log(move);
-        m_Animator.SetFloat("Speed", move);
-        lastPosition = transform.position;
+        
 
 
 
