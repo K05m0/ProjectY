@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3150119bfb5f8f43a000de5247d1c56, type: 3}
+  m_Name: so_fireGun
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 0}
+  gunPrefab: {fileID: 5694363814161406726, guid: c21626f6d7bc3564d9670f5b60c92625,
+    type: 3}
+  gunBaseDmg: 0
+  gunEffectDmg: 2
+  gunEffectDuration: 2
+  maxAmmo: 100
+  currAmmo: 100
+  useAmmoPerSec: 2
+  regenAmmoPerSec: 0
+  delayToRegen: 0
+  shootPower: 0

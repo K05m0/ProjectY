@@ -8,7 +8,7 @@ public class PlayerManager : MonoBehaviour
     private PlayerControllHolder controllHolder;
     private CharacterController controller;
     private PlayerRotation rotation;
-    private PlayerShoot shoot;
+    private PlayerShootSystem shoot;
 
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     {
         rotation = GetComponent<PlayerRotation>();
         movement = GetComponent<PlayerMovement>();
-        shoot = GetComponent<PlayerShoot>();
+        shoot = GetComponent<PlayerShootSystem>();
         controllHolder = GetComponent<PlayerControllHolder>();
         controller = GetComponent<CharacterController>();
     }
