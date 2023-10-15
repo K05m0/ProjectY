@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    private Animator m_Animator;
     private PlayerMovement movement;
     private PlayerControllHolder controllHolder;
     private CharacterController controller;
@@ -16,9 +17,14 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float freeRotationSpeed;
     [SerializeField] private float normalRotationSpeed;
 
+    private float move;
     private float movementSpeed;
+    
     [SerializeField] private MoveState playerMoveState;
     [SerializeField] private AimState playerAimState;
+
+
+    
 
     private void Awake()
     {
@@ -27,9 +33,19 @@ public class PlayerManager : MonoBehaviour
         shoot = GetComponent<PlayerShootSystem>();
         controllHolder = GetComponent<PlayerControllHolder>();
         controller = GetComponent<CharacterController>();
+        m_Animator = GetComponent<Animator>();
     }
+
+   
     private void Update()
     {
+        
+
+
+
+
+
+
         AimStateController();
         MoveStateController();
 
@@ -63,11 +79,13 @@ public class PlayerManager : MonoBehaviour
     {
         if (Input.GetKey(controllHolder.runKeyCode))
         {
+           
             playerMoveState = MoveState.Run;
             movementSpeed = runSpeed;
         }
         else
         {
+            
             playerMoveState = MoveState.Walk;
             movementSpeed = walkSpeed;
         }
