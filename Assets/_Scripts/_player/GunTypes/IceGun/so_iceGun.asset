@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3150119bfb5f8f43a000de5247d1c56, type: 3}
+  m_Name: so_iceGun
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 0}
+  gunPrefab: {fileID: 3889249770128132967, guid: 934765950c89d504cbce6d9e57d8393e,
+    type: 3}
+  gunBaseDmg: 2
+  gunEffectDmg: 1
+  gunEffectDuration: 3
+  maxAmmo: 0
+  currAmmo: 0
+  useAmmoPerSec: 0
+  regenAmmoPerSec: 0
+  delayToRegen: 0
+  isRenegerate: 0
+  shootPower: 0
