@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] private float freeRotationSpeed;
     [SerializeField] private float normalRotationSpeed;
+    [SerializeField] private Transform Collider;
 
     private float move;
     private float movementSpeed;
@@ -51,11 +52,11 @@ public class PlayerManager : MonoBehaviour
 
         if (playerAimState == AimState.aim)
         {
-            rotation.PlayerFreeRotation(freeRotationSpeed, controllHolder.GetMousePosition().position);
+            rotation.PlayerFreeRotation(freeRotationSpeed, controllHolder.GetMousePosition().position,Collider);
         }
         else if (playerAimState == AimState.notAim)
         {
-            rotation.PlayerNormalRotation(controllHolder.vertical, controllHolder.horizontal, normalRotationSpeed);
+            rotation.PlayerNormalRotation(controllHolder.vertical, controllHolder.horizontal, normalRotationSpeed,Collider);
         }
 
         shoot.Shoot(controllHolder.shoot);

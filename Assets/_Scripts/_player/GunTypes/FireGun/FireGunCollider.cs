@@ -14,6 +14,15 @@ public class FireGunCollider : MonoBehaviour
             burningObject.Add(other.gameObject);
             burn.StartBurning(parameters.gunEffectDmg);
         }
+        else
+        {
+            var parent = other.transform.parent;
+            if(parent.TryGetComponent<IBurnable>(out IBurnable burnParent))
+            {
+                burningObject.Add(parent.gameObject);
+                burnParent.StartBurning(parameters.gunEffectDmg);
+            }
+        }
 
     }
     private void OnTriggerExit(Collider other)
@@ -23,13 +32,21 @@ public class FireGunCollider : MonoBehaviour
             burningObject.Remove(other.gameObject);
             burnable.StartDelayToDisableBurn(parameters.gunEffectDuration);
         }
+        else
+        {
+            var parent = other.transform.parent;
+            if (parent.TryGetComponent<IBurnable>(out IBurnable burnParent))
+            {
+                burningObject.Remove(parent.gameObject);
+                burnParent.StartDelayToDisableBurn(parameters.gunEffectDuration);
+            }
+        }
 
     }
     private void OnDisable()
     {
         foreach (GameObject obj in burningObject)
         {
-
             if (obj != null && obj.TryGetComponent<IBurnable>(out IBurnable burnable))
                 burnable.StartDelayToDisableBurn(parameters.gunEffectDuration);
         }

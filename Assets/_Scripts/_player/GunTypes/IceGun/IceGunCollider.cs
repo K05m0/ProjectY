@@ -14,6 +14,15 @@ public class IceGunCollider : MonoBehaviour
             freezingObject.Add(other.gameObject);
             freeze.Freezing(parameters.gunBaseDmg, parameters.gunEffectDmg);
         }
+        else
+        {
+            var parent = other.transform.parent;
+            if (parent.TryGetComponent<IFrozenable>(out IFrozenable freezeParent))
+            {
+                freezingObject.Add(parent.gameObject);
+                freezeParent.Freezing(parameters.gunBaseDmg, parameters.gunEffectDmg);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -22,6 +31,15 @@ public class IceGunCollider : MonoBehaviour
         {
             freezingObject.Remove(other.gameObject);
             freeze.StartDeleyToUnfreez(parameters.gunEffectDuration);
+        }
+        else
+        {
+            var parent = other.transform.parent;
+            if (parent.TryGetComponent<IFrozenable>(out IFrozenable freezeParent))
+            {
+                freezingObject.Remove(parent.gameObject);
+                freezeParent.StartDeleyToUnfreez(parameters.gunEffectDuration);
+            }
         }
     }
 

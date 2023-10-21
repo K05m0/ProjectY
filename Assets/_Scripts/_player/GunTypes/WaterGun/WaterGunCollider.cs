@@ -14,6 +14,15 @@ public class WaterGunCollider : MonoBehaviour
             wetObject.Add(other.gameObject);
             wet.StartBeingWet();
         }
+        else
+        {
+            var parent = other.transform.parent;
+            if(parent.TryGetComponent<IWetable>(out IWetable wetParent))
+            {
+                wetObject.Add(parent.gameObject);
+                wetParent.StartBeingWet();
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -22,6 +31,15 @@ public class WaterGunCollider : MonoBehaviour
         {
             wetObject.Remove(other.gameObject);
             wet.StartDeleyToDry(parameters.gunEffectDuration);
+        }
+        else
+        {
+            var parent = other.transform.parent;
+            if(parent.TryGetComponent<IWetable>(out IWetable wetParent))
+            {
+                wetObject.Remove(parent.gameObject);
+                wet.StartDeleyToDry(parameters.gunEffectDuration);
+            }
         }
     }
 
