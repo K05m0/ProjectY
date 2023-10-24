@@ -8,35 +8,35 @@ public class DogEnemyManager : MonoBehaviour
     private DogEnemyFieldOfView fieldOfView;
     private DogEnemyMovement movement;
     private EnemyStats stats;
-    private NavMeshAgent navMeshAgent;
-
-    private IEnemyWalkState walkState;
+    private NavMeshAgent agent;
 
     private void Awake()
     {
         fieldOfView = GetComponent<DogEnemyFieldOfView>();
         movement = GetComponent<DogEnemyMovement>();
+        agent = gameObject.GetComponent<NavMeshAgent>();
         stats = GetComponent<EnemyStats>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     private void Start()
     {
-        walkState = movement.WalkStateUpdate(fieldOfView.isPlayerInFieldOfView, stats, navMeshAgent);
-
-        movement.WaypointsSetUp();
         StartCoroutine(fieldOfView.FindPlayerWithDeley(stats));
-        StartCoroutine(movement.CheckDistance());
+        movement.SetUpWaypoints();
     }
 
     private void Update()
     {
-        walkState = movement.WalkStateUpdate(fieldOfView.isPlayerInFieldOfView, stats, navMeshAgent);
+        if (!fieldOfView.isPlayerInFieldOfView)
+        {
+            stats.FieldOfViewWhileChase();
+        }
+        else
+        {
+            stats.FieldOfViewWhilePatroll();
+        }
 
-        if (walkState == null)
-        { return; }
-        movement.Movement(navMeshAgent);
-
+        movement.WalkStateController(fieldOfView.isPlayerInFieldOfView, fieldOfView.playerTransform, agent);
+        movement.MovementScript(agent);
     }
 
     private void FixedUpdate()

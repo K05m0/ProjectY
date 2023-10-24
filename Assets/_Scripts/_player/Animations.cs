@@ -23,7 +23,7 @@ public class Animations : MonoBehaviour
     void Update()
     {
         move = controller.velocity.magnitude;
-        Debug.Log(move);
+        //Debug.Log(move);
         m_Animator.SetFloat("Speed", move);
         
         if (Input.GetKey(KeyCode.R)) {

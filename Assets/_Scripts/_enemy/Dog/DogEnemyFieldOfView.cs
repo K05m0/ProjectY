@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DogEnemyFieldOfView : MonoBehaviour
 {
-    [SerializeField, Range(0.1f,1f)] private float deleyToRefresh;
-    [SerializeField, Range (0.1f,1f)] private float meshResolution;
+    [SerializeField, Range(0.1f, 1f)] private float deleyToRefresh;
+    [SerializeField, Range(0.1f, 1f)] private float meshResolution;
 
-    [SerializeField, Range (1,5)] private float f_edgeDstThreshold;
+    [SerializeField, Range(1, 5)] private float f_edgeDstThreshold;
     [SerializeField, Range(1, 5)] private int i_edgeResolveIteration;
 
     [SerializeField] private LayerMask targetMask;
@@ -17,6 +17,7 @@ public class DogEnemyFieldOfView : MonoBehaviour
     private Mesh viewMesh;
 
     public bool isPlayerInFieldOfView;
+    public Transform playerTransform;
     private void Awake()
     {
         viewMesh = new Mesh();
@@ -97,7 +98,7 @@ public class DogEnemyFieldOfView : MonoBehaviour
         for (int i = 0; i < i_edgeResolveIteration; i++)
         {
             float angle = (minAngle + maxAngle) / 2;
-            ViewCastInfo newViewCast = ViewCast(angle,stats);
+            ViewCastInfo newViewCast = ViewCast(angle, stats);
 
             bool edgeDstThresholdExceeded = Mathf.Abs(minViewCast.dst - newViewCast.dst) > f_edgeDstThreshold;
             if (newViewCast.hit == minViewCast.hit && !edgeDstThresholdExceeded)
@@ -141,7 +142,7 @@ public class DogEnemyFieldOfView : MonoBehaviour
             angle = _angle;
         }
     }
-    private struct EdgeInfo 
+    private struct EdgeInfo
     {
         public Vector3 pointA;
         public Vector3 pointB;
@@ -158,7 +159,7 @@ public class DogEnemyFieldOfView : MonoBehaviour
             angleInDegrees += transform.eulerAngles.y;
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
-    private bool FindPlayerInEnemyFieldOfView(EnemyStats stats)
+    private void FindPlayerInEnemyFieldOfView(EnemyStats stats)
     {
 
         Collider[] targetPlayer = Physics.OverlapSphere(transform.position, stats.seeRange, targetMask);
@@ -171,16 +172,28 @@ public class DogEnemyFieldOfView : MonoBehaviour
             {
                 float dstToTarget = Vector3.Distance(transform.position, target.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
+                {
                     isPlayerInFieldOfView = true;
+                    playerTransform = target.transform;
+                }
+
                 else
+                {
                     isPlayerInFieldOfView = false;
+                    playerTransform = null;
+                }
             }
             else
+            {
                 isPlayerInFieldOfView = false;
+                playerTransform = null;
+            }
         }
         else
+        {
             isPlayerInFieldOfView = false;
+            playerTransform = null;
+        }
 
-        return isPlayerInFieldOfView;
     }
 }
