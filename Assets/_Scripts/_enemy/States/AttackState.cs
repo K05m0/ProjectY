@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaseState : EnemyState
+public class AttackState : EnemyState
 {
     public override void EnterState(EnemyStateManager enemy)
     {
@@ -17,6 +17,6 @@ public class ChaseState : EnemyState
     public override void UpdateState(EnemyStateManager enemy)
     {
         Debug.Log("update in " + this.GetType().Name);
-        enemy.SwitchState(enemy.attackState);
+        enemy.SwitchState(enemy.patrollState);
     }
 }
