@@ -29,7 +29,6 @@ public class EnemyManager : MonoBehaviour
     {
         if (stats.drawFieldOfView)
         {
-            Debug.Log("mleko");
             fieldOfView.DrawEnemyFieldOfView(stats); 
         }
     }

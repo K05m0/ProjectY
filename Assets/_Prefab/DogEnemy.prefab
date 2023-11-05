@@ -54,10 +54,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -77,17 +77,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7393cc18332488a4fb2075278f2c765a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireParticle: {fileID: 0}
+  fireParticle: {fileID: 1545080102487011931}
   _isBurning: 0
-  unfreezeMultiplayer: 0
-  iceParticle: {fileID: 0}
-  unfreezeSpeed: 0
-  unfreezeTimeBetweenTick: 0
+  unfreezeMultiplayer: 1.5
+  iceParticle: {fileID: 1545080103408052585}
+  unfreezeSpeed: 4
+  unfreezeTimeBetweenTick: 1
   _isFreezing: 0
   freezeValue: 0
   _isWet: 0
-  waterParticle: {fileID: 0}
-  wetFreezingMultiplayer: 0
+  waterParticle: {fileID: 4306464351206393692}
+  wetFreezingMultiplayer: 2
 --- !u!114 &5915105057284817017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,13 +132,13 @@ MonoBehaviour:
   viewAngleWhilePatroll: 45
   waypointsHolder: {fileID: 4389994167150664164}
   waypoints: []
-  rangeWhileFreePatroll: 15
+  rangeWhileFreePatroll: 10
   chaseSpeed: 10
   chaseRange: 7
   viewAngleWhileChase: 360
   viewAngle: 0
   seeRange: 0
-  drawFieldOfView: 0
+  drawFieldOfView: 1
   seeRangeWhileChase: 10
   seeRangeWhilePatroll: 7
   attackRange: 2.5
@@ -507,6 +507,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a86be7f019f83747a32fc6a0235658f, type: 3}
+--- !u!1 &1545080103408052585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3527618016251762715, guid: 7a86be7f019f83747a32fc6a0235658f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2703751661773222258}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1545080103408052586 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3527618016251762712, guid: 7a86be7f019f83747a32fc6a0235658f,
@@ -587,6 +593,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c59991801a190db4bbfd9663ff4b6aea, type: 3}
+--- !u!1 &1545080102487011931 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3283259613992477088, guid: c59991801a190db4bbfd9663ff4b6aea,
+    type: 3}
+  m_PrefabInstance: {fileID: 4098628689890857979}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1545080102487011932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3283259613992477095, guid: c59991801a190db4bbfd9663ff4b6aea,
@@ -670,6 +682,12 @@ PrefabInstance:
 --- !u!4 &341999090397201564 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5872668999881547975, guid: a6bf9af983a128f48b6e7b332d92a08e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6179201521117471835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4306464351206393692 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7927265022832075527, guid: a6bf9af983a128f48b6e7b332d92a08e,
     type: 3}
   m_PrefabInstance: {fileID: 6179201521117471835}
   m_PrefabAsset: {fileID: 0}

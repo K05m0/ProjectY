@@ -6,45 +6,68 @@ using UnityEngine.AI;
 
 public class PatrollState : EnemyState
 {
-    private Transform startPos;
+    private Vector3 startPos;
     private Vector3 target;
+    private int currWaypoint;
     public override void EnterState(EnemyStateManager enemy)
     {
-        if (startPos == null)
+        if (startPos == Vector3.zero)
         {
-            startPos = enemy.transform;
+            startPos = enemy.transform.position;
         }
-        FindNewTarget(enemy.stats, enemy.agent);
+        FindNewTarget(enemy.stats, enemy.agent, enemy.indicator);
     }
 
     public override void ExitState(EnemyStateManager enemy)
     {
-
+        Debug.Log("Exit state: " + this.GetType().Name);
     }
 
     public override void UpdateState(EnemyStateManager enemy)
     {
-        if (Vector3.Distance(enemy.transform.position, target) < enemy.agent.stoppingDistance)
+        if (enemy.fielOfView.isPlayerInFieldOfView)
         {
-            FindNewTarget(enemy.stats, enemy.agent);
+            enemy.SwitchState(enemy.chaseState);
+            return;
         }
-    }
 
-    private void FindNewTarget(EnemyStats stats, NavMeshAgent agent)
+        if (Vector3.Distance(enemy.transform.position, target) <= enemy.agent.stoppingDistance)
+        {
+            FindNewTarget(enemy.stats, enemy.agent, enemy.indicator);
+        }
+
+        if (enemy.agent.velocity.magnitude != 0)
+        { return; }
+
+        FindNewTarget(enemy.stats, enemy.agent, enemy.indicator);
+        enemy.agent.SetDestination(target);
+    }
+    private void FindNewTarget(EnemyStats stats, NavMeshAgent agent, Transform moveIndicator)
     {
         if (stats.waypointPatroll)
         {
-           
+            if (currWaypoint < stats.waypoints.Count - 1)
+            {
+                currWaypoint++;
+            }
+            else
+            {
+                currWaypoint = 0;
+            }
+            target = stats.waypoints[currWaypoint];
+            moveIndicator.gameObject.SetActive(false);
+
         }
         else
         {
             Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * stats.rangeWhileFreePatroll;
-            randomDirection += startPos.position;
-            NavMeshHit hit; 
-            NavMesh.SamplePosition(randomDirection, out hit, stats.rangeWhileFreePatroll, NavMesh.AllAreas);
-            target = hit.position;
+            randomDirection += startPos;
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomDirection, out hit, stats.rangeWhileFreePatroll, NavMesh.AllAreas))
+                target = hit.position;
+            moveIndicator.gameObject.SetActive(true);
+            moveIndicator.position = target;
         }
-        Debug.Log("find");
         agent.SetDestination(target);
     }
 }

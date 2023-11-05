@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ChaseState : EnemyState
 {
+    private Vector3 target;
     public override void EnterState(EnemyStateManager enemy)
     {
-        Debug.Log("welcome in " + this.GetType().Name);
+        target = enemy.fielOfView.playerTransform.position;
     }
 
     public override void ExitState(EnemyStateManager enemy)
@@ -16,7 +17,18 @@ public class ChaseState : EnemyState
 
     public override void UpdateState(EnemyStateManager enemy)
     {
-        Debug.Log("update in " + this.GetType().Name);
-        enemy.SwitchState(enemy.attackState);
+        if (!enemy.fielOfView.isPlayerInFieldOfView)
+        {
+            enemy.SwitchState(enemy.patrollState);
+            return;
+        }
+        target = enemy.fielOfView.playerTransform.position;
+        enemy.agent.SetDestination(target);
+        if (Vector3.Distance(enemy.transform.position, target) <= enemy.stats.attackRange)
+        {
+            enemy.SwitchState(enemy.attackState);
+            return;
+        }
+
     }
 }

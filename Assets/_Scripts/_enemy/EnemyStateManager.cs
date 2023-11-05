@@ -8,7 +8,9 @@ public class EnemyStateManager : MonoBehaviour
     public EnemyStats stats;
     public EnemyFieldOfView fielOfView;
     public NavMeshAgent agent;
+    public Transform indicator;
 
+    
     #region State
     private EnemyState currState;
     public PatrollState patrollState = new PatrollState();
@@ -24,6 +26,7 @@ public class EnemyStateManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(currState.ToString());
         currState.UpdateState(this);
     }
 
